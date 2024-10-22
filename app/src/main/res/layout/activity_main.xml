@@ -299,7 +299,7 @@
         android:gravity="bottom|right"
         android:text="0"
         android:textColor="#243642"
-        android:textSize="64sp"
+        android:textSize="85sp"
         app:layout_constraintEnd_toEndOf="@+id/textViewİslem"
         app:layout_constraintStart_toStartOf="@+id/textViewİslem"
         app:layout_constraintTop_toBottomOf="@+id/textViewİslem" />
