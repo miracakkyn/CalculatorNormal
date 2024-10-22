@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonVirgul: Button
     private lateinit var textViewİslem: TextView
     private lateinit var textViewSonuc: TextView
-    var sonucSayi=0
-    var sayi1=0
-    var sayi2=0
+    var sonucSayi=0.0
+    var sayi1=0.0
+    var sayi2=0.0
     var ustIslem=""
     var altIslem="0"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +45,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        sonucSayi.toDouble()
-        sayi1.toDouble()
-        sayi2.toDouble()
+
 
         button0=findViewById(R.id.button0)
         button1=findViewById(R.id.button1)
@@ -122,9 +120,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }fun buttonVirgul(View:View){
-
-        ekle(buttonVirgul)
-
+        if (!textViewSonuc.text.toString().contains(".")) {
+            textViewSonuc.text = textViewSonuc.text.toString() + "."
+        }
 
     }fun buttonSilme(View:View){
         var text=textViewSonuc.text.toString()
@@ -158,8 +156,8 @@ class MainActivity : AppCompatActivity() {
             var yedekIslem=textViewİslem.text.toString().last()
             var ustTextSayi=textViewİslem.text.toString()
             ustTextSayi=ustTextSayi.dropLast(1)
-            sayi1=ustTextSayi.toInt()
-            sayi2=textViewSonuc.text.toString().toInt()
+            sayi1=ustTextSayi.toDouble()
+            sayi2=textViewSonuc.text.toString().toDouble()
             println("Merhaba")
             if(yedekIslem=='+'){
                 sonucSayi=sayi1+sayi2
@@ -168,7 +166,7 @@ class MainActivity : AppCompatActivity() {
             }else if(yedekIslem=='×'){
                 sonucSayi=sayi1*sayi2
             }else if(yedekIslem=='÷'){
-                if(sayi2!=0){
+                if(sayi2!=0.0){
                     sonucSayi=sayi1/sayi2
                 }else{
                     Toast.makeText(this,"SAYILAR SIFIRA BÖLÜNEMEZ",Toast.LENGTH_LONG).show()
@@ -176,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             }
             textViewİslem.text=""
             textViewSonuc.text=sonucSayi.toString()
-            sonucSayi=0
+            sonucSayi=0.0
         }
 
 
@@ -184,7 +182,7 @@ class MainActivity : AppCompatActivity() {
 
         textViewİslem.text=""
         textViewSonuc.text="0"
-        sonucSayi=0
+        sonucSayi=0.0
 
 
     }
@@ -200,13 +198,13 @@ class MainActivity : AppCompatActivity() {
     fun sayiKapsulle(button: Button){
         altIslem=button.text.toString()
         if(textViewSonuc.text.toString().isNotEmpty() && textViewSonuc.text.toString()!="0"){
-            var yedekSayi=textViewSonuc.text.toString().toInt()
+            var yedekSayi=textViewSonuc.text.toString().toDouble()
             if(altIslem=="+"){
                 sonucSayi+=yedekSayi
                 textViewİslem.text=sonucSayi.toString()+altIslem
                 textViewSonuc.text=""
             }else if(altIslem=="-"){
-                if(sonucSayi==0){
+                if(sonucSayi==0.0){
                     sonucSayi=yedekSayi
                 }else{
                     sonucSayi-=yedekSayi
@@ -221,7 +219,7 @@ class MainActivity : AppCompatActivity() {
                     textViewSonuc.text=""
                 }else{
                     textViewİslem.text=textViewSonuc.text.toString()+altIslem
-                    sonucSayi=textViewSonuc.text.toString().toInt()
+                    sonucSayi=textViewSonuc.text.toString().toDouble()
                     textViewSonuc.text=""
                 }
 
@@ -234,8 +232,8 @@ class MainActivity : AppCompatActivity() {
 
                     }else{
                         var gecici=textViewİslem.text.toString().dropLast(1)
-                        sonucSayi=gecici.toInt()
-                        yedekSayi=textViewSonuc.text.toString().toInt()
+                        sonucSayi=gecici.toDouble()
+                        yedekSayi=textViewSonuc.text.toString().toDouble()
                         sonucSayi=sonucSayi/yedekSayi
                         textViewİslem.text=sonucSayi.toString()+altIslem
                         textViewSonuc.text=""
